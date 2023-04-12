@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@arcgis/core": "^4.26.5",
+    "g": "^2.0.1",
+    "http-server": "^14.1.1"
+  }
+}
