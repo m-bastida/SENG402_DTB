@@ -1,12 +1,8 @@
 require([
   "esri/Map",
   "esri/views/SceneView",
-  "esri/layers/FeatureLayer",
-  "esri/core/promiseUtils",
-  "esri/Graphic",
-  "esri/geometry/Point",
-  "esri/rest/locator"
-], (Map, SceneView, FeatureLayer, promiseUtils, Graphic, Point, locator) => {
+  "esri/layers/FeatureLayer"
+], (Map, SceneView, FeatureLayer) => {
 
   
 const view = new SceneView({
@@ -27,7 +23,7 @@ const view = new SceneView({
 },
   camera: {
     position: {
-      x: 172.639847,
+      x: 172.639847, //Christchurch
       y: -43.525650,
       z: 48.61,
     },
@@ -54,7 +50,7 @@ const view = new SceneView({
     .then(createLayer)
     .then(addToView)
     .catch((e) => {
-      console.error("Creating FeatureLayer from photos failed", e);
+      console.error("Creating FeatureLayer failed", e);
     });
 
     
