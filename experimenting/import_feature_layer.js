@@ -24,7 +24,11 @@ const view = new SceneView({
   //  Creates a client-side FeatureLayer from an array of graphics
   function createLayer (){
     return new FeatureLayer({
-      url: "https://services.arcgis.com/hLRlshaEMEYQG5A8/arcgis/rest/services/Trees_SENG_Canopy/FeatureServer",
+      //4bc8537233344d04b9c37041f7204049
+      portalItem: {
+        id: "4bc8537233344d04b9c37041f7204049"
+      },
+      // url: "https://services.arcgis.com/hLRlshaEMEYQG5A8/arcgis/rest/services/Trees_SENG_Canopy/FeatureServer",
       objectIdField: "OBJECTID",
       fields: [{
         name: "OBJECTID",
