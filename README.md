@@ -10,7 +10,7 @@ The purpose of this project is to investigate the development of an application 
 
 In a terminal, type:
 
-`clone https://github.com/m-bastida/SENG402_DTB`
+`git clone https://github.com/m-bastida/SENG402_DTB`
 
 ## Script selection
 
