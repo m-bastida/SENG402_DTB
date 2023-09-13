@@ -2,8 +2,9 @@ require([
     "esri/Map",
     "esri/views/SceneView",
     "esri/layers/FeatureLayer",
-    "esri/symbols/WebStyleSymbol"
-  ], (Map, SceneView, FeatureLayer, WebStyleSymbol) => {
+    "esri/layers/GraphicsLayer",
+    "esri/widgets/Sketch",
+  ], (Map, SceneView, FeatureLayer, GraphicsLayer, Sketch) => {
     
   const view = new SceneView({
     container: "viewDiv",
@@ -47,6 +48,8 @@ require([
   };
   
   var serverlayer = new FeatureLayer({portalItem: {id: "3ca3220e1e894b8cb80c4dbab9ecbe7c"}})
+  const graphicsLayer = new GraphicsLayer();
+  view.map.add(graphicsLayer);
 
   let features = [
     {
@@ -87,11 +90,25 @@ require([
   });
   view.map.add(clientlayer);
   
-view.on("click", function(event){
+// view.on("click", function(event){
+//     let query = serverlayer.createQuery();
+//     query.geometry = view.toMap(event);  // the point location of the pointer
+//     query.distance = 2;
+//     query.units = "miles";
+//     query.spatialRelationship = "intersects";  // this is the default
+//     query.returnGeometry = true;
+  
+//     serverlayer.queryFeatures(query)
+//       .then(function(response){
+//         console.log("query complete")
+//         console.log(response.features[0].attributes)
+//         clientlayer.applyEdits({addFeatures:response.features});
+//       });
+//   });
+
+  function selectFeatures(geometry){
     let query = serverlayer.createQuery();
-    query.geometry = view.toMap(event);  // the point location of the pointer
-    query.distance = 2;
-    query.units = "miles";
+    query.geometry = geometry
     query.spatialRelationship = "intersects";  // this is the default
     query.returnGeometry = true;
   
@@ -101,6 +118,33 @@ view.on("click", function(event){
         console.log(response.features[0].attributes)
         clientlayer.applyEdits({addFeatures:response.features});
       });
+
+  }
+
+
+
+  view.when(() => {
+    const sketch = new Sketch({
+      layer: graphicsLayer,
+      view: view,
+    });
+
+    view.ui.add(sketch, "top-right");
+    
+
+// Listen to sketch widget's create event.
+sketch.on("create", function(event) {
+  // check if the create event's state has changed to complete indicating
+  // the graphic create operation is completed.
+  if (event.state === "complete") {
+    // remove the graphic from the layer. Sketch adds
+    // the completed graphic to the layer by default.
+    graphicsLayer.remove(event.graphic);
+
+    // use the graphic.geometry to query features that intersect it
+    selectFeatures(event.graphic.geometry);
+  }
+});
   });
 
 });
