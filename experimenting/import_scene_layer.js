@@ -23,7 +23,7 @@ require([
 
     const tree_layer = new SceneLayer({
       portalItem: {
-        id: "1b80895e989f485dbfb5770de8cd1d2b"
+        id: "c4503d5aea1144d7950e5300648828b0"
       },
       popupEnabled: false,
       renderer: renderer
