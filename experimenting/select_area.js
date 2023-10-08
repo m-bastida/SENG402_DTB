@@ -28,8 +28,7 @@ layerGroup.server.queryFeatures(query)
  * @param {GraphicsLayer} graphicsLayer the graphics layer the sketch is attached to
  */
 function createSketchEvent(sketch, layerGroups, graphicsLayer){
-// Listen to sketch widget's create event.
-sketch.on("create", function(event) {
+  sketch.on("create", function(event) {
     // check if the create event's state has changed to complete indicating
     // the graphic create operation is completed.
     if (event.state === "complete" && event.graphic.geometry.type === "polygon") {
