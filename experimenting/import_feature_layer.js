@@ -5,10 +5,11 @@ require([
   "esri/symbols/WebStyleSymbol"
 ], (Map, SceneView, FeatureLayer, WebStyleSymbol) => {
   
+  // setup scene view
 const view = new SceneView({
   container: "viewDiv",
   map: new Map({
-    basemap: "osm",
+    basemap: "osm", // open street map
     ground: "world-elevation",
 }),
 
@@ -23,14 +24,12 @@ const view = new SceneView({
 });
 
 
-
+// create tree layer
   function createLayer (){
     var layer =  new FeatureLayer({
-      //4bc8537233344d04b9c37041f7204049
       portalItem: {
-        id: "4bc8537233344d04b9c37041f7204049"
+        id: "4bc8537233344d04b9c37041f7204049" // tree SENG centroid layer
       },
-      // url: "https://services.arcgis.com/hLRlshaEMEYQG5A8/arcgis/rest/services/Trees_SENG_Canopy/FeatureServer",
       objectIdField: "OBJECTID",
       fields: [{
         name: "OBJECTID",
@@ -39,11 +38,6 @@ const view = new SceneView({
     ],
     renderer : {
       type: "simple", // autocasts as new SimpleRenderer()
-      // symbol: {
-      //   type: "web-style", // autocasts as new WebStyleSymbol()
-      //   styleName: "esriRealisticTreesStyle",
-      //   name: "Other",
-      // },
       visualVariables: [
         {
           type: "size",
@@ -59,6 +53,7 @@ const view = new SceneView({
     }
     });
 
+    // set tree symbol
     var symbol = new WebStyleSymbol({
       styleName: "esriRealisticTreesStyle",
       name: "Other",
@@ -73,10 +68,6 @@ const view = new SceneView({
         layer.renderer = renderer;
       });
 
-      layer.when(() => {
-        view.extent = layer.fullExtent;
-        console.log(layer.spacialReference)
-      })
       return layer
   }
 

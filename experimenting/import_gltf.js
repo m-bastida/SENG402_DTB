@@ -4,7 +4,7 @@ require([
   "esri/layers/FeatureLayer"
 ], (Map, SceneView, FeatureLayer) => {
 
-  
+  // setup scene view
 const view = new SceneView({
   container: "viewDiv",
   map: new Map({
@@ -32,11 +32,13 @@ const view = new SceneView({
   },
 });
 
+// create feature location
   let features = [
     {
       geometry: {
         type: "point",
-        x: 172.639847,
+        // set position in front of camera
+        x: 172.639847, 
         y: -43.525650,
         z: 20,
       },
@@ -55,7 +57,7 @@ const view = new SceneView({
 
     
 
-  //  Creates a client-side FeatureLayer from an array of graphics
+  //  Creates a client-side FeatureLayer from feature array
   function createLayer (){
     return new FeatureLayer({
       source: features,
@@ -74,7 +76,8 @@ const view = new SceneView({
               type: "object",
               height: 30,
               resource: {
-                href: "../models/flamingo.glb"
+                href: "../models/flamingo.gltf" // use custom model
+                // .glb file types work as well
               }
             }
           ]

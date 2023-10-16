@@ -51,6 +51,7 @@ var serverlayer = new FeatureLayer({portalItem: {id: "3ca3220e1e894b8cb80c4dbab9
 const graphicsLayer = new GraphicsLayer();
 view.map.add(graphicsLayer);
 
+// setup feature array for initialisation of client layer
 let features = [
   {
     geometry: {
@@ -66,9 +67,10 @@ let features = [
     }
   },
  ];
+
+ // create client layer
 var clientlayer =  new FeatureLayer({
   source: features,
-  // portalItem: {id: "3ca3220e1e894b8cb80c4dbab9ecbe7c"},
   objectIdField: "OBJECTID",
   fields: [{
     name: "OBJECTID",
@@ -89,22 +91,6 @@ elevationInfo: {
 renderer: renderer
 });
 view.map.add(clientlayer);
-
-// view.on("click", function(event){
-//     let query = serverlayer.createQuery();
-//     query.geometry = view.toMap(event);  // the point location of the pointer
-//     query.distance = 2;
-//     query.units = "miles";
-//     query.spatialRelationship = "intersects";  // this is the default
-//     query.returnGeometry = true;
-
-//     serverlayer.queryFeatures(query)
-//       .then(function(response){
-//         console.log("query complete")
-//         console.log(response.features[0].attributes)
-//         clientlayer.applyEdits({addFeatures:response.features});
-//       });
-//   });
 
 function selectFeatures(geometry){
   let query = serverlayer.createQuery();
