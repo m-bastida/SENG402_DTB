@@ -24,10 +24,10 @@ const view = new SceneView({
   camera: {
     position: {
       x: 172.639847, //Christchurch
-      y: -43.525650,
+      y: -43.527650,
       z: 48.61,
     },
-    heading: 516,
+    heading: 0,
     tilt: 85,
   },
 });
@@ -38,7 +38,7 @@ const view = new SceneView({
         type: "point",
         x: 172.639847,
         y: -43.525650,
-        z: 30,
+        z: 20,
       },
       attributes: {
         ObjectID: 1,
@@ -72,9 +72,9 @@ const view = new SceneView({
           symbolLayers: [
             {
               type: "object",
-              height: 10,
+              height: 30,
               resource: {
-                href: "./models/flamingo.glb"
+                href: "../models/flamingo.glb"
               }
             }
           ]

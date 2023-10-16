@@ -24,7 +24,6 @@ const view = new SceneView({
 
 
 
-  //  Creates a client-side FeatureLayer from an array of graphics
   function createLayer (){
     var layer =  new FeatureLayer({
       //4bc8537233344d04b9c37041f7204049
@@ -80,41 +79,6 @@ const view = new SceneView({
       })
       return layer
   }
-  //  Creates a client-side FeatureLayer from an array of graphics
-  // function createLayer2 (){
-  //   var layer =  new FeatureLayer({
-  //     //4bc8537233344d04b9c37041f7204049
-  //     portalItem: {
-  //       id: "3ca3220e1e894b8cb80c4dbab9ecbe7c"
-  //     },
-  //     // url: "https://services.arcgis.com/hLRlshaEMEYQG5A8/arcgis/rest/services/Trees_SENG_Canopy/FeatureServer",
-  //     objectIdField: "OBJECTID",
-  //     fields: [{
-  //       name: "OBJECTID",
-  //       type: "oid"
-  //     }
-  //   ],
-  //   renderer : {
-  //     type: "simple", // autocasts as new SimpleRenderer()
-  //     // symbol: {
-  //     //   type: "web-style", // autocasts as new WebStyleSymbol()
-  //     //   styleName: "esriRealisticTreesStyle",
-  //     //   name: "Other",
-  //     // },
-  //   },
-  //   elevationInfo: {
-  //     mode: "on-the-ground",
-  //     offset: 0,
-  //   }
-    // });
-
-  //     layer.when(() => {
-  //       view.extent = layer.fullExtent;
-  //       console.log(layer.spacialReference)
-  //     })
-  //     return layer
-  // }
-
 
 
   // Adds a given layer to the map in the view
@@ -126,9 +90,6 @@ const view = new SceneView({
   view.when()
     .then(createLayer)
     .then(addToView)
-    // .then(createLayer2)
-    // .then(addToView)
-    .then(() => {console.log("done.")})
     .catch((e) => {
       console.error("Creating FeatureLayer failed", e);
     });

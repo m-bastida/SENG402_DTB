@@ -1,0 +1,7 @@
+title: "Digital Twin Builder"
+name: "Max Bastida"
+sponsor: "Eagle Technology"
+supervisor: "Ben Adams"
+type: "industry"
+abstract: | 
+  An application was developed to generate digital twins of New Zealand cities for use in urban planning and addressing heat islands in urban areas. In collaboration with Eagle Technology, the ArcGIS platform was used to create an application that could generate three dimensional models of New Zealand cities from location data for trees and buildings. These models also display data about the location and intensity of urban heat islands. Urban heat islands occur because heat is generated and trapped by materials and morphology of urban areas. Urban planners can edit the trees and buildings in the model which will update to show the effect of their changes on urban heat islands. This will help urban planners visualise areas and what adjustments can be made, and how this will impact the heat that is trapped within the city. 

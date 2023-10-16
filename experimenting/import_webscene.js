@@ -13,7 +13,8 @@ require(["esri/layers/FeatureLayer", "esri/WebScene", "esri/views/SceneView", "e
     const webscene = new WebScene({
       portalItem: {
         // id: "206a6a13162c4d9a95ea6a87abad2437"
-        id: "c4503d5aea1144d7950e5300648828b0"
+        //id: "c4503d5aea1144d7950e5300648828b0"
+        id: "1eacaab86df24d2bb9484b24142f3fbe"
       }
     });
 
