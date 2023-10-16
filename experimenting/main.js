@@ -30,6 +30,7 @@ camera: {
 },
 });
 
+
 // create a graphics layer for the sketch widget
 const graphicsLayer = new GraphicsLayer();
 view.map.add(graphicsLayer);
@@ -70,6 +71,22 @@ let features = [
         y: 0,
         z: 0,
         },
+    }
+];
+
+// create a feature map with polygons for initialising building layer
+let buildingfeatures = [
+    // needs one dummy point
+    {
+        geometry: {
+            type: "polygon",
+            rings: [
+                [0, 0], //Longitude, latitude
+                [1, 1], //Longitude, latitude
+                [1, 0], //Longitude, latitude
+            ]
+        },
+        attributes:{"height": 5},
     }
 ];
 
@@ -149,6 +166,52 @@ var heatclientlayer =  new FeatureLayer({
 // create server layer to fetch heatmap data
 var heatserverlayer = new FeatureLayer({portalItem: {id: "3ca3220e1e894b8cb80c4dbab9ecbe7c"}})
 
+// create a client layer to store updated building data
+var buildingclientlayer =  new FeatureLayer({
+    source: buildingfeatures,
+    objectIdField: "OBJECTID",
+    fields: [{
+        name: "OBJECTID",
+        type: "oid"
+    }, {
+        name: "height",
+        type: "single"
+    }
+    ],
+    renderer : {
+        type: "simple", // autocasts as new UniqueValueRenderer()
+        symbol: {
+            type: "polygon-3d", // autocasts as new PolygonSymbol3D()
+            symbolLayers: [
+              {
+                type: "extrude", // autocasts as new ExtrudeSymbol3DLayer()
+                material: {
+                  color: "FFFFFF"
+                },
+                edges: {
+                  type: "solid",
+                  color: "#999",
+                  size: 0.5
+                }
+              }
+            ]
+          },
+        visualVariables: [
+          {
+            type: "size",
+            field: "height"
+          }
+        ]
+      },
+    elevationInfo: {
+        mode: "on-the-ground",
+        offset: 0,
+    }
+});
+
+// create a display layer to show existing building data
+var buildingdisplaylayer = new SceneLayer({portalItem: {id: "ca0470dbbddb4db28bad74ed39949e25"}})
+
 // setup layer pairs
 const heatLayers = {
     server: heatserverlayer,
@@ -163,6 +226,8 @@ const treeLayers = {
 // add client layers to view
 view.map.add(heatclientlayer);
 view.map.add(treeclientlayer);
+view.map.add(buildingclientlayer);
+view.map.add(buildingdisplaylayer);
 
 // NOTE: server layers are not added to the view, but are only used to query for data
 
